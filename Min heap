@@ -1,0 +1,43 @@
+#include<stdio.h>
+void minheap(int a[],int n);
+void heapfy(int a[],int n,int i);
+void main()
+{
+int a[20],n,i,c=0;
+printf("enter size");
+scanf("%d",&n);
+printf("enter elements");
+for(i=1;i<=n;i++)
+{
+scanf("%d",&a[i]);
+c++;
+minheap(a,c);
+}
+printf("Elements in min heap are\n");
+for(i=1;i<=n;i++)
+printf("%d ",a[i]);
+}
+void minheap(int a[],int n)
+{
+int i;
+for(i=n/2;i>0;i--)
+heapfy(a,n,i);
+}
+void heapfy(int a[],int n,int i)
+{
+int temp,small,left,right;
+small=i;
+left=2*i;
+right=2*i+1;
+if(left<=n&&a[left]<a[large])
+small=left;
+if(right<=n&&a[right]<a[large])
+small=right;
+if(i!=small)
+{
+temp=a[small];
+a[small]=a[i];
+a[i]=temp;
+heapfy(a,n,small);
+}
+}
