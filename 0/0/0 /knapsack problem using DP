@@ -1,0 +1,50 @@
+#include <stdio.h>
+int knapsack(int p[],int wt[],int n,int c);
+int max(int a,int b);
+void main()
+{
+int n,profit[10],weight[10],capacity,i,result;
+printf("enter number of objects");
+scanf("%d",&n);
+printf("enter profits");
+for(i=0;i<n;i++)
+{
+scanf("%d",&profit[i]);
+}
+printf("enter weights");
+for(i=0;i<n;i++)
+{
+scanf("%d",&weight[i]);
+}
+printf("enter capacity");
+scanf("%d",&capacity);
+result=knapsack(profit,weight,n,capacity);
+printf("Total profit is:%d",result);
+}
+int knapsack(int p[],int wt[],int n,int c)
+{
+int a[10][10];
+int i,w;
+for(i=0;i<=n;i++)
+{
+
+for(w=0;w<=c;w++)
+{
+if(i==0||w==0)
+a[i][w]=0;
+else if(wt[i-1]>w)
+{
+a[i][w]=a[i-1][w];
+}
+else
+{
+a[i][w]=max(a[i-1][w],a[i-1][w-wt[i-1]]+p[i-1]);
+}
+}
+}
+return a[n][c];
+}
+int max(int a,int b)
+{
+return (a>b)?a:b;
+}
